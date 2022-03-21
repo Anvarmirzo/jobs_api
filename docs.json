@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "5aa2a8c3-f8f2-473b-ad9c-2ce4ee9987c0",
+		"name": "Jobs API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsdata = pm.response.json()\r",
+							"pm.globals.set(\"accessToken\", jsdata.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const data = pm.response.json()\r",
+							"pm.globals.set(\"accessToken\", data.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Anvar\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Jobs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjM3OWU2OTU1YzY4NDM3MmNkNDQzYTIiLCJuYW1lIjoiQW52YXIiLCJpYXQiOjE2NDc4NTIyNzMsImV4cCI6MTY0NzkzODY3M30.Lqc0__xdaCvlo2_AjM4SBFhFv3e5WUe0k_Pr3zvk7zM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"position\": \"freelancer\",\r\n    \"company\": \"StarCraft\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{JOBS_URL}}jobs",
+					"host": [
+						"{{JOBS_URL}}jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Job",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{JOBS_URL}}jobs/6238651fc474482584d6994b",
+					"host": [
+						"{{JOBS_URL}}jobs"
+					],
+					"path": [
+						"6238651fc474482584d6994b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company\": \"Netflix\",\r\n    \"position\": \"QA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{JOBS_URL}}jobs",
+					"host": [
+						"{{JOBS_URL}}jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Job",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company\": \"Netlify\",\r\n    \"position\": \"Frontend developer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{JOBS_URL}}jobs/6238651fc474482584d6994b",
+					"host": [
+						"{{JOBS_URL}}jobs"
+					],
+					"path": [
+						"6238651fc474482584d6994b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Job",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{JOBS_URL}}jobs/62384e4354cbc44478d9cc35",
+					"host": [
+						"{{JOBS_URL}}jobs"
+					],
+					"path": [
+						"62384e4354cbc44478d9cc35"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
